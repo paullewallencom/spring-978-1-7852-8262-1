@@ -1,0 +1,7 @@
+<xwss:SecurityConfiguration dumpMessages="true" 
+xmlns:xwss="http://java.sun.com/xml/ns/xwss/config">
+    <xwss:Timestamp />
+         <xwss:UsernameToken name="PacktUser" 
+		 password="password" 	 
+		 digestPassword="true" useNonce="true"/> 
+</xwss:SecurityConfiguration>

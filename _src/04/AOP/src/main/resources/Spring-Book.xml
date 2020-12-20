@@ -1,0 +1,59 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean id="bookService" class="com.packt.spring.BookService">
+		<property name="name" value="Packt" />
+		<property name="url" value="packt.com" />
+	</bean>
+	<bean id="AOPBeforeMethodBean" class="com.packt.spring.aop.AOPBeforeMethod" />
+	<bean id="bookServiceProxy" 
+                 class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="bookService" />
+		<property name="interceptorNames">
+			<list>
+				<value>AOPBeforeMethodBean</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="AOPAfterMethodBean" class="com.packt.spring.aop.AOPAfterMethod" />
+	<bean id="bookServiceProxy1" 
+                class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="bookService" />
+		<property name="interceptorNames">
+			<list>
+				<value>AOPAfterMethodBean</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="AOPThrowExceptionBean" class="com.packt.spring.aop.AOPThrowException" />
+	<bean id="bookServiceProxy2" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="bookService" />
+		<property name="interceptorNames">
+			<list>
+				<value>AOPThrowExceptionBean</value>
+			</list>
+		</property>
+	</bean>
+		<bean id="AOPAroundMethodBean" class="com.packt.spring.aop.AOPAroundMethod" />
+	<bean id="bookServiceProxy3" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="bookService" />
+		<property name="interceptorNames">
+			<list>
+				<value>AOPAroundMethodBean</value>
+			</list>
+		</property>
+	</bean>
+	
+			<bean id="AOPAfterFinallyMethodBean" class="com.packt.spring.aop.AOPAfterFinallyMethod" />
+	<bean id="bookServiceProxy4" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="bookService" />
+		<property name="interceptorNames">
+			<list>
+				<value>AOPAfterFinallyMethodBean</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+</beans>

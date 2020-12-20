@@ -1,0 +1,9 @@
+curl -i -X POST -d j_username=admin -d j_password=admin -c ./aa.txt http://localhost:8080/spring_rest_security_packtpub/j_spring_security_check
+curl -i -H "Content-Type:application/json" -X GET -b ./aa.txt http://localhost:8080/spring_rest_security_packtpub/packt/books/user
+curl -i -H "Content-Type:application/json" -X GET -b ./aa.txt http://localhost:8080/spring_rest_security_packtpub/packt/books/admin
+
+curl -i -X POST -d j_username=user -d j_password=user -c ./bb.txt http://localhost:8080/spring_rest_security_packtpub/j_spring_security_check
+curl -i -H "Content-Type:application/json" -X GET -b ./bb.txt http://localhost:8080/spring_rest_security_packtpub/packt/books/user
+curl -i -H "Content-Type:application/json" -X GET -b ./bb.txt http://localhost:8080/spring_rest_security_packtpub/packt/books/admin
+
+curl -i -X POST -d j_username=user -d j_password=wrongPass -c ./bb.txt http://localhost:8080/spring_rest_security_packtpub/j_spring_security_check

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+<aop:aspectj-autoproxy />
+<bean name="Book" class="com.packt.spring.model.Book">
+    <property name="name" value="Book Name"></property>
+</bean>
+<bean name="BookService" class="com.packt.spring.service.BookService">
+    <property name="Book" ref="Book"></property>
+</bean>
+<bean name="BookAspect" class="com.packt.spring.aspect.BookAspect" />
+<bean name="BookAspectPointcut" class="com.packt.spring.aspect.BookAspectPointcut" />
+<bean name="BookAspectJoinPoint" class="com.packt.spring.aspect.BookAspectJoinPoint" />
+<bean name="BookAfterAspect" class="com.packt.spring.aspect.BookAfterAspect" />
+<bean name="BookAroundAspect" class="com.packt.spring.aspect.BookAroundAspect" />
+<bean name="BookAnnotationAspect" class="com.packt.spring.aspect.BookAnnotationAspect" />
+ <bean name="BookXMLConfigAspect" class="com.packt.spring.aspect.BookXMLConfigAspect" />
+ <!-- Spring AOP XML Configuration -->
+<aop:config>
+    <aop:aspect ref="BookXMLConfigAspect" id="BookXMLConfigAspectID" order="1">
+        <aop:pointcut expression="execution(* com.packt.spring.model.Book.getName())" id="getNamePointcut"/>
+        <aop:around method="BookAroundAdvice" pointcut-ref="getNamePointcut" arg-names="proceedingJoinPoint"/>
+    </aop:aspect>
+</aop:config>
+</beans>

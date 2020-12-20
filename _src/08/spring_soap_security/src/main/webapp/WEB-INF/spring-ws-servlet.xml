@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:sws="http://www.springframework.org/schema/web-services"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services-2.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<context:component-scan base-package="com.packtpub.spring_soap_security.service" />
+	<sws:annotation-driven />
+	<sws:dynamic-wsdl id="BookService" portTypeName="BookService"
+		locationUri="http://localhost:8080/spring_soap_security/spring-ws/BookService"
+		targetNamespace="http://www.packtpub.com/spring_soap_security/BookService/schema">
+		<sws:xsd location="/WEB-INF/BookService.xsd" />
+	</sws:dynamic-wsdl>
+	<sws:interceptors>
+		<bean
+			class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+			<property name="schema" value="/WEB-INF/BookService.xsd" />
+			<property name="validateRequest" value="true" />
+			<property name="validateResponse" value="true" />
+		</bean>
+                <bean class="org.springframework.ws.soap.security.xwss.XwsSecurityInterceptor">
+		        <property name="policyConfiguration" value="/WEB-INF/securityPolicy.xml"/>
+		        <property name="callbackHandlers">
+		            <list>
+		                  <ref bean="springSecurityHandler"/>
+		            </list>
+		        </property>
+		    </bean>
+    </sws:interceptors> 
+  <bean id="springSecurityHandler"
+      class="org.springframework.ws.soap.security.xwss.callback.SpringDigestPasswordValidationCallbackHandler">
+       <property name="userDetailsService" ref="userDetailsService"/>
+  </bean> 
+  <bean id="userDetailsService" class="com.packtpub.spring_soap_security.service.dao.MyUserDetailService" />
+</beans>

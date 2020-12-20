@@ -1,0 +1,31 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/security 
+    http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+	<http use-expressions="true" create-session="never" auto-config="true">
+		<remember-me />
+		<intercept-url pattern="/" access="permitAll" />
+		<intercept-url pattern="/home" access="permitAll" />
+		<intercept-url pattern="/login" access="permitAll" />
+       	<intercept-url pattern="/publish/**" access="hasRole('publisher')" />
+		<intercept-url pattern="/author/**" access="hasRole('author')" />
+		<intercept-url pattern="/read/**" access="hasRole('reader')" />
+		<intercept-url pattern="/**" access="denyAll" />
+		<form-login login-page="/login" />
+	</http>
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider>
+		<user-service>
+           	<user name="packt" password="test" 
+			authorities="publisher,author,reader" />
+			<user name="nanda" password="test" authorities="reader,author" />
+			<user name="developer" password="test" authorities="reader" />
+		</user-service>
+		</authentication-provider>
+	</authentication-manager>
+<beans:bean id="securityContextPersistenceFilter"
+class="org.springframework.security.web.context.SecurityContextPersistenceFilter" />
+</beans:beans>   

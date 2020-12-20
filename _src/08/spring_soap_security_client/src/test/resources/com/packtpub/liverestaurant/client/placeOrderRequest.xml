@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:placeBookRequest xmlns:tns="http://www.packtpub.com/
+spring_soap_security/BookService/schema">
+  <tns:order>
+    <tns:refNumber>1234</tns:refNumber>
+    <tns:customer>
+      <tns:addressPrimary>
+        <tns:doorNo>22</tns:doorNo>
+        <tns:building>12</tns:building>
+        <tns:street>ABC</tns:street>
+        <tns:city>Mumbai</tns:city>
+        <tns:phoneLandLine>12345678</tns:phoneLandLine>
+        <tns:email>packt@packt.com</tns:email>
+      </tns:addressPrimary>
+      <tns:name>
+        <tns:fName>Packt</tns:fName>
+        <tns:mName>Pub</tns:mName>
+        <tns:lName>Pact</tns:lName>
+      </tns:name>
+    </tns:customer>
+    <tns:dateSubmitted>2008-09-29T05:49:45</tns:dateSubmitted>
+    <tns:orderDate>2014-09-19T03:18:33</tns:orderDate>
+    <tns:items>
+      <tns:type>Book1</tns:type>
+      <tns:name>Book2</tns:name>
+      <tns:quantity>8</tns:quantity>
+    </tns:items>
+  </tns:order>
+</tns:placeBookRequest>
+

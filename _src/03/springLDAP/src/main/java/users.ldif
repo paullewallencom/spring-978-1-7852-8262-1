@@ -1,0 +1,13 @@
+dn: ou=users,ou=system
+sn: SN-1
+telephoneNumber: 33333
+objectClass: person
+objectClass: top
+cn: CN-1
+
+dn: ou=users,ou=system
+sn: SN-2
+telephoneNumber: 77777
+objectClass: person
+objectClass: top
+cn: CN-2

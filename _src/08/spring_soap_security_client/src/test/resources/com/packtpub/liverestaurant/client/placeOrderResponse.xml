@@ -1,0 +1,2 @@
+<tns:placeBookResponse xmlns:tns="http://www.packtpub.com/spring_soap_security/BookService/schema">
+<tns:refNumber>Packt_pub_1234</tns:refNumber></tns:placeBookResponse>
